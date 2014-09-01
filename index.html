@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="My Thinkful sandbox for AngularJS">
+	<meta name="author" content="Robbie Smith">
+	<link rel="icon" href="app/img/favicon.ico">
+	<title>Unit 1 - Madlibs</title>
+
+	<link href="style.css" rel="stylesheet">
+
+</head>
+<body>
+	<div class="container" ng-controller="madlibs">
+		<table border="2" width="100%" cellspacing="0" cellpadding="10">
+			<tr>
+				<td class="text-center">
+					<img src="mad-lib-happy-face.png" height="70" width="70" />
+				</td>
+				<td class="text-center">
+					<img src="ng-mad-libs-logo.png" height="30" /><br>
+					<h1>Automate This!</h1>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<form id="madlibs" class="bottom-offset-30"  ng-submit="applyMadLibs()">
+						<table width="100%">
+							<tr>
+								<td class="text-center">
+									<input type="text" name="male_name" id="male_name" ng-model="male_name" value="male name" ng-click="male_name=''" size="14" />
+								</td>
+								<td class="text-center">
+									<input type="text" name="dirty_task" id="dirty_task" ng-model="dirty_task" value="dirty task" ng-click="dirty=''" size="9" />
+								</td>
+								<td class="text-center">
+									<input type="text" name="obnoxiuous_celebrity" id="obnoxiuous_celebrity" ng-model="obnoxiuous_celebrity" value="obnoxiuous celebrity" ng-click="obnoxiuous_celebrity=''" size="20" />
+								</td>
+							</tr>
+							<tr>
+								<td class="text-center">
+									<input type="text" name="job_title" id="job_title" ng-model="job_title" value="job title" ng-click="job_title=''" size="8" />
+								</td>
+								<td class="text-center">
+									<input type="text" name="celebrity" id="celebrity" ng-model="celebrity" value="celebrity" ng-click="celebrity=''" size="8" />
+								</td>
+								<td class="text-center">
+									<input type="text" name="huge_number" id="huge_number" ng-model="huge_number" value="huge number" ng-click="huge_number=''" size="12" />
+								</td>
+							</tr>
+							<tr>
+								<td class="text-center">
+									<input type="text" name="tedious_task" id="tedious_task" ng-model="tedious_task" value="tedious task" ng-click="tedious_task=''" size="12" />
+								</td>
+								<td class="text-center">
+									<input type="text" name="useless_skill" id="useless_skill" ng-model="useless_skill" value="useless skill" ng-click="useless_skill=''" size="12" />
+								</td>
+								<td class="text-center">
+									<input type="text" name="adjective" id="adjective" ng-model="adjective" value="adjective" ng-click="adjective=''" size="8" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"></td>
+								<td><input type="submit" id="submit" value="Submit" />
+						</table>
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" ng-bind-html="story | unsafe"></td>
+			</tr>
+		</table>
+	</div>
+	<!-- /container -->
+<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+	<script>
+		var myApp = angular.module('myApp',[]);
+
+		myApp.controller('madlibs', ['$scope', function($scope) {
+
+			$scope.story = "<p>{{male_name}} was a {{job_title}} who loved technology. Although he loved parts of his job, he absolutely hated  {{tedious_task}} and {{dirty_task}}. So, {{male_name}} met with his life mentor {{celebrity}} who told his to learn how to {{useless_skill}} with Thinkful. Thinkful didn't offer a course on {{useless_skill}} so he studied programming instead.</p><p>What a great decision! With his new skills, {{male_name}} built a(n) {{adjective}} robot named {{obnoxiuous_celebrity}} that not only loved {{dirty_task}} but did it {{huge_number}} faster.</p>";	
+
+			$scope.male_name = "male name";
+			$scope.dirty_task = "Dirty task";
+			$scope.obnoxiuous_celebrity = "Obnoxiuous celebrity";
+			
+			$scope.job_title = "Job title";
+			$scope.celebrity = "Celebrity";
+			$scope.huge_number = "Huge number";
+			
+			$scope.tedious_task = "Tedious task";
+			$scope.useless_skill = "Useless skill";
+			$scope.adjective="Adjective";
+
+			$scope.applyMadLibs = function () {
+				$scope.male_name = this.male_name;
+				$scope.dirty_task = this.dirty_task;
+				$scope.obnoxiuous_celebrity = this.obnoxiuous_celebrity;
+				
+				$scope.job_title = this.job_title;
+				$scope.celebrity = this.celebrity;
+				$scope.huge_number = this.huge_number;
+				
+				$scope.tedious_task = this.tedious_task;
+				$scope.useless_skill = this.useless_skill;
+				$scope.adjective = this.adjective;
+
+				$scope.story = "<p>" + this.male_name + " was a " + this.job_title + " who loved technology. Although he loved parts of his job, he absolutely hated  " + this.tedious_task + "  and " + this.dirty_task + ". So, " + this.male_name + "  met with his life mentor " + this.celebrity + "  who told his to learn how to " + this.useless_skill + "  with Thinkful. Thinkful didn't offer a course on " + this.useless_skill + "  so he studied programming instead.</p><p>What a great decision! With his new skills, " + this.male_name + "  built a(n) " + this.adjective + "  robot named " + this.obnoxiuous_celebrity + "  that not only loved " + this.dirty_task + "  but did it " + this.huge_number + "  faster.</p>";
+			}
+		}]);
+		myApp.filter('unsafe', function($sce) {
+		    return function(val) {
+		        return $sce.trustAsHtml(val);
+		    };
+		});
+	</script>
+</body>
+</html>

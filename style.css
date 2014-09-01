@@ -1,0 +1,20 @@
+body {
+	font-family:"Comic Sans MS", cursive, sans-serif;
+}
+
+.container {
+	width:600px;
+	margin:0px auto;
+}
+
+.text-center {
+	text-align: center;
+}
+
+h1 {
+	margin:0px;
+}
+
+input {
+	border:2px solid;
+}
